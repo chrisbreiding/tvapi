@@ -10,4 +10,5 @@
 #
 
 class Show < ActiveRecord::Base
+  validates_presence_of :display_name, :search_name, :file_name, :tvsource_id
 end
