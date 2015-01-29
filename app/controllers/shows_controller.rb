@@ -22,6 +22,12 @@ class ShowsController < ApplicationController
     end
   end
 
+  def destroy
+    show = Show.find(params[:id])
+    show.destroy
+    head 204
+  end
+
   private
 
   def show_params
