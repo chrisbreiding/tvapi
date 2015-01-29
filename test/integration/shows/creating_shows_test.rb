@@ -45,6 +45,11 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 422, response.status
   end
 
+  test 'duplicate tvsource id -> status' do
+    Show.create!(show_attributes)
+    create_invalid_show :tvsource_id, '1'
+    assert_equal 422, response.status
+  end
 
   def create_valid_show
     post '/shows',
@@ -52,9 +57,9 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
       { 'Content-Type' => 'application/json' }
   end
 
-  def create_invalid_show(invalid_attribute)
+  def create_invalid_show(invalid_attribute, value = nil)
     attributes = show_attributes
-    attributes[invalid_attribute] = nil
+    attributes[invalid_attribute] = value
     post '/shows',
       { show: attributes }.to_json,
       { 'Content-Type' => 'application/json' }
