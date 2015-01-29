@@ -6,14 +6,19 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 201, response.status
   end
 
+  test 'valid -> type' do
+    create_valid_show
+    assert_equal Mime::JSON, response.content_type
+  end
+
   test 'valid -> location' do
     create_valid_show
-    assert_equal show_url(show_from_reponse[:id]), response.location
+    assert_equal show_url(show_from_response[:id]), response.location
   end
 
   test 'valid -> content' do
     create_valid_show
-    show = show_from_reponse
+    show = show_from_response
     assert_equal show_attributes[:display_name], show[:display_name]
     assert_equal show_attributes[:search_name], show[:search_name]
     assert_equal show_attributes[:file_name], show[:file_name]
@@ -55,7 +60,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
       { 'Content-Type' => 'application/json' }
   end
 
-  def show_from_reponse
+  def show_from_response
     json(response.body)[:show]
   end
 
