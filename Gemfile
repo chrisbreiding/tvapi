@@ -13,3 +13,5 @@ group :development do
   gem 'spring'
   gem 'annotate'
 end
+
+gem 'pry', groups: [:development, :test]
