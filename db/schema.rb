@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207005117) do
+ActiveRecord::Schema.define(version: 20150207012830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "episodes", force: :cascade do |t|
+    t.integer "season"
+    t.integer "episode_number"
+    t.string  "title"
+    t.date    "airdate"
+    t.integer "show_id"
+  end
+
+  add_index "episodes", ["show_id"], name: "index_episodes_on_show_id", using: :btree
 
   create_table "shows", force: :cascade do |t|
     t.string "display_name"
