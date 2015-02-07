@@ -45,9 +45,9 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 422, response.status
   end
 
-  test 'duplicate tvsource id -> status' do
+  test 'duplicate source id -> status' do
     Show.create!(show_attributes)
-    create_invalid_show :tvsource_id, '1'
+    create_invalid_show :source_id, '1'
     assert_equal 422, response.status
   end
 
