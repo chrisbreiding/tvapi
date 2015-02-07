@@ -5,11 +5,11 @@ class DeletingShowsTest < ActionDispatch::IntegrationTest
     @show1 = Show.create!(display_name: 'Show 1 Display',
                  search_name: 'Show 1 Search',
                  file_name: 'Show 1 File',
-                 tvsource_id: '1')
+                 source_id: '1')
     @show2 = Show.create!(display_name: 'Show 2 Display',
                  search_name: 'Show 2 Search',
                  file_name: 'Show 2 File',
-                 tvsource_id: '2')
+                 source_id: '2')
 
     delete "/shows/#{@show1.id}"
   end

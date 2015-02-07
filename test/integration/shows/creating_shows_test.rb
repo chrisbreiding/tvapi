@@ -22,7 +22,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal show_attributes[:display_name], show[:display_name]
     assert_equal show_attributes[:search_name], show[:search_name]
     assert_equal show_attributes[:file_name], show[:file_name]
-    assert_equal show_attributes[:tvsource_id], show[:tvsource_id]
+    assert_equal show_attributes[:source_id], show[:source_id]
   end
 
   test 'no display name -> status' do
@@ -40,8 +40,8 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 422, response.status
   end
 
-  test 'no tvsource id -> status' do
-    create_invalid_show :tvsource_id
+  test 'no source id -> status' do
+    create_invalid_show :source_id
     assert_equal 422, response.status
   end
 
@@ -74,7 +74,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
       display_name: 'New Show Display',
       search_name: 'New Show Search',
       file_name: 'New Show File',
-      tvsource_id: '1'
+      source_id: '1'
     }
   end
 end

@@ -34,7 +34,7 @@ class ShowsController < ApplicationController
     params.require(:show).permit(:display_name,
                                  :search_name,
                                  :file_name,
-                                 :tvsource_id)
+                                 :source_id)
   end
 
 end

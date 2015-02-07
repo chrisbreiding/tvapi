@@ -56,7 +56,7 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
       display_name: 'New Show Display',
       search_name: 'New Show Search',
       file_name: 'New Show File',
-      tvsource_id: '1'
+      source_id: '1'
     }
   end
 end

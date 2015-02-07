@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129033930) do
+ActiveRecord::Schema.define(version: 20150207005117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150129033930) do
     t.string "display_name"
     t.string "search_name"
     t.string "file_name"
-    t.string "tvsource_id"
+    t.string "source_id"
   end
 
 end
