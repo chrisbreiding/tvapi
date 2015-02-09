@@ -16,3 +16,10 @@ Show.create!([{
   file_name: 'My Dog',
   source_id: '3'
 }])
+
+Setting.destroy_all
+
+Setting.create!({
+  view_link: 'http://example.com?q=%s',
+  last_updated: 8.hours.ago
+})
