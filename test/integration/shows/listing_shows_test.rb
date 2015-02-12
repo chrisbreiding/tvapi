@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ListingShowsTest < ActionDispatch::IntegrationTest
-
   setup do
     Show.create!(display_name: 'Show 1 Display',
                  search_name: 'Show 1 Search',
@@ -29,5 +28,4 @@ class ListingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 'Show 1 Display', shows.first[:display_name]
     assert_equal 'Show 2 Display', shows.second[:display_name]
   end
-
 end

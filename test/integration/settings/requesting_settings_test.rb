@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class RequestingSettingsTest < ActionDispatch::IntegrationTest
-
   setup do
     @date = DateTime.new
     Setting.create!(view_link: 'Anything', last_updated: @date)

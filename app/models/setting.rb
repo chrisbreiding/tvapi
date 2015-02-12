@@ -8,9 +8,9 @@
 #
 
 class Setting < ActiveRecord::Base
+  validates_presence_of :view_link
 
   def self.data
     self.first || self.new
   end
-
 end
