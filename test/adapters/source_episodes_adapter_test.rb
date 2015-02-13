@@ -62,7 +62,7 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
   end
 
   test 'default title' do
-    assert_equal '', @second_episode[:title]
+    assert_equal nil, @second_episode[:title]
   end
 
   test 'default airdate' do

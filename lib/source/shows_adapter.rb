@@ -17,15 +17,15 @@ module Source
       [{
         selector: 'seriesid',
         property: :id,
-        default:  ''
+        default:  nil
       }, {
         selector: 'SeriesName',
         property: :name,
-        default:  'Unknown'
+        default:  nil
       }, {
         selector: 'Overview',
         property: :description,
-        default:  ''
+        default:  nil
       }, {
         selector: 'FirstAired',
         property: :first_aired,
@@ -34,7 +34,7 @@ module Source
       }, {
         selector: 'Network',
         property: :network,
-        default:  ''
+        default:  nil
       }]
   end
 

@@ -14,11 +14,11 @@ class SourceShowsAdapterTest < ActiveSupport::TestCase
             'FirstAired' => '2015-02-13',
             'Network' => 'DEF'
           },{
-            'seriesid' => '5678',
-            'SeriesName' => 'Bar',
-            'Overview' => 'Bar is about...',
-            'FirstAired' => '2012-11-02',
-            'Network' => 'GHI'
+            'seriesid' => nil,
+            'SeriesName' => nil,
+            'Overview' => nil,
+            'FirstAired' => nil,
+            'Network' => nil
           }
         ]
       }
@@ -27,6 +27,7 @@ class SourceShowsAdapterTest < ActiveSupport::TestCase
     adapter = Source::ShowsAdapter.new(source_data)
     @shows = adapter.shows
     @first_show = @shows[0]
+    @second_show = @shows[1]
   end
 
   test 'count' do
@@ -51,6 +52,26 @@ class SourceShowsAdapterTest < ActiveSupport::TestCase
 
   test 'network' do
     assert_equal 'DEF', @first_show[:network]
+  end
+
+  test 'default id' do
+    assert_equal nil, @second_show[:id]
+  end
+
+  test 'default name' do
+    assert_equal nil, @second_show[:name]
+  end
+
+  test 'default description' do
+    assert_equal nil, @second_show[:description]
+  end
+
+  test 'default first_aired' do
+    assert_equal DateTime.parse('1970-01-01'), @second_show[:first_aired]
+  end
+
+  test 'default network' do
+    assert_equal nil, @second_show[:network]
   end
 
 end

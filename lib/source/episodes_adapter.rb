@@ -27,7 +27,7 @@ module Source
       },{
         selector: 'EpisodeName',
         property: :title,
-        default: ''
+        default: nil
       },{
         selector: 'FirstAired',
         property: :airdate,
