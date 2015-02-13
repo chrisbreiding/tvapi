@@ -4,7 +4,7 @@ require 'source/shows_gateway'
 class SourceShowsGatewayTest < ActionDispatch::IntegrationTest
 
   setup do
-    @gateway = Source::ShowsGateway.new(ENV['source_api_key'])
+    @gateway = Source::ShowsGateway.new
     @shows = @gateway.search('the office')
     @first_show = @shows['Data']['Series'][0]
   end

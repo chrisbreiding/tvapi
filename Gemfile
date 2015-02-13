@@ -10,6 +10,7 @@ gem 'pg'
 gem 'active_model_serializers'
 gem 'figaro'
 gem 'retryable'
+gem 'rubyzip'
 gem 'whenever', :require => false
 
 group :development do
