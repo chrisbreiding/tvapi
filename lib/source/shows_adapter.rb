@@ -1,22 +1,14 @@
+require 'source/adapter_base'
+
 module Source
-  class ShowsAdapter
+  class ShowsAdapter < AdapterBase
 
     def initialize(source_data)
       @source_data = source_data
     end
 
     def shows
-      series = @source_data['Data']['Series']
-      series.map do |show|
-        conversions.reduce({}) do |memo, c|
-          value = show.fetch(c[:selector], c[:default])
-          if c[:transform]
-            value = c[:transform].call value
-          end
-          memo[c[:property]] = value
-          memo
-        end
-      end
+      convert @source_data['Data']['Series'], conversions
     end
 
     private

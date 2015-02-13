@@ -1,22 +1,14 @@
+require 'source/adapter_base'
+
 module Source
-  class EpisodesAdapter
+  class EpisodesAdapter < AdapterBase
 
     def initialize(source_data)
       @source_data = source_data
     end
 
     def episodes
-      sodes = @source_data['Data']['Episode']
-      sodes.map do |episode|
-        conversions.reduce({}) do |memo, c|
-          value = episode[c[:selector]] || c[:default]
-          if c[:transform]
-            value = c[:transform].call value
-          end
-          memo[c[:property]] = value
-          memo
-        end
-      end
+      convert @source_data['Data']['Episode'], conversions
     end
 
     private
