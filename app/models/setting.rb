@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  view_link    :string
-#  last_updated :date
+#  last_updated :datetime
 #
 
 class Setting < ActiveRecord::Base

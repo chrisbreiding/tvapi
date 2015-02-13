@@ -6,7 +6,7 @@
 #  season         :integer
 #  episode_number :integer
 #  title          :string
-#  airdate        :date
+#  airdate        :datetime
 #  show_id        :integer
 #
 
