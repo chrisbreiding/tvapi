@@ -1,9 +1,9 @@
+require 'source/gateway_base'
+
 module Source
-  class EpisodesGateway
+  class EpisodesGateway < GatewayBase
     require 'open-uri'
     require 'zip'
-
-    BASE_URL = "http://thetvdb.com/api/"
 
     def initialize(api_key)
       @api_key = api_key
@@ -20,7 +20,7 @@ module Source
     private
 
     def show_url(show_id)
-      "#{BASE_URL}#{@api_key}/series/#{show_id}/all/en.zip"
+      "#{base_url}#{@api_key}/series/#{show_id}/all/en.zip"
     end
 
     def download_show_zip(show_id)
