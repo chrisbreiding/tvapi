@@ -8,7 +8,8 @@ gem 'puma'
 gem 'pg'
 
 gem 'active_model_serializers'
-gem 'nokogiri'
+gem 'figaro'
+gem 'retryable'
 gem 'whenever', :require => false
 
 group :development do
