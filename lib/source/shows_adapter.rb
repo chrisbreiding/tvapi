@@ -7,6 +7,12 @@ module Source
       convert source_data['Data']['Series'], show_conversions
     end
 
+    def show_ids_and_time(source_data)
+      show_ids = source_data['Items']['Series']
+      timestamp = source_data['Items']['Time']
+      [show_ids, DateTime.strptime(timestamp, '%s')]
+    end
+
     private
 
     def show_conversions
