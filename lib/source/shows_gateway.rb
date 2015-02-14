@@ -5,11 +5,11 @@ module Source
     require 'open-uri'
 
     def search(show_name)
-      Hash.from_xml(open(URI.escape(search_url(show_name))))
+      hash_from_xml_url(search_url(show_name))
     end
 
     def updated_since(datetime)
-      Hash.from_xml(open(URI.escape(updated_since_url(datetime))))
+      hash_from_xml_url(updated_since_url(datetime))
     end
 
     private
