@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'source/shows_adapter'
 
-class SourceShowsAdapterTest < ActiveSupport::TestCase
+class SourceShowsAdapterShowsTest < ActiveSupport::TestCase
 
   setup do
     source_data = {

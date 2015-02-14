@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'source/shows_gateway'
 
-class SourceShowsSearchGatewayTest < ActionDispatch::IntegrationTest
+class SourceShowsGatewaySearchTest < ActionDispatch::IntegrationTest
 
   setup do
     gateway = Source::ShowsGateway.new
