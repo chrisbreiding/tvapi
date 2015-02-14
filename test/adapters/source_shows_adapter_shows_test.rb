@@ -24,8 +24,8 @@ class SourceShowsAdapterShowsTest < ActiveSupport::TestCase
       }
     }
 
-    adapter = Source::ShowsAdapter.new(source_data)
-    @shows = adapter.shows
+    adapter = Source::ShowsAdapter.new
+    @shows = adapter.shows(source_data)
     @first_show = @shows[0]
     @second_show = @shows[1]
   end

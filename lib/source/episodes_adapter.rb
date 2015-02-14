@@ -3,17 +3,13 @@ require 'source/adapter_base'
 module Source
   class EpisodesAdapter < AdapterBase
 
-    def initialize(source_data)
-      @source_data = source_data
-    end
-
-    def episodes
-      convert @source_data['Data']['Episode'], conversions
+    def episodes(source_data)
+      convert source_data['Data']['Episode'], episode_conversions
     end
 
     private
 
-    def conversions
+    def episode_conversions
       [{
         selector: 'SeasonNumber',
         property: :season,

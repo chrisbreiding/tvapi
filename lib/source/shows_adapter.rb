@@ -3,17 +3,13 @@ require 'source/adapter_base'
 module Source
   class ShowsAdapter < AdapterBase
 
-    def initialize(source_data)
-      @source_data = source_data
-    end
-
-    def shows
-      convert @source_data['Data']['Series'], conversions
+    def shows(source_data)
+      convert source_data['Data']['Series'], show_conversions
     end
 
     private
 
-    def conversions
+    def show_conversions
       [{
         selector: 'seriesid',
         property: :id,

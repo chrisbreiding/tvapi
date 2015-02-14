@@ -27,8 +27,8 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
       }
     }
 
-    adapter = Source::EpisodesAdapter.new(source_data)
-    @episodes = adapter.episodes
+    adapter = Source::EpisodesAdapter.new
+    @episodes = adapter.episodes(source_data)
     @first_episode = @episodes[0]
     @second_episode = @episodes[1]
   end

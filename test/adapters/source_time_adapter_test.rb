@@ -10,8 +10,8 @@ class SourceShowsAdapterTest < ActiveSupport::TestCase
       }
     }
 
-    adapter = Source::TimeAdapter.new(source_data)
-    @current_timestamp = adapter.current_timestamp
+    adapter = Source::TimeAdapter.new
+    @current_timestamp = adapter.current_timestamp(source_data)
   end
 
   test 'current timestamp is a datetime' do
