@@ -5,7 +5,7 @@ module Source
     require 'open-uri'
 
     def current_timestamp
-      Hash.from_xml(open(URI.escape(url)))['Items']['Time']
+      Hash.from_xml(open(URI.escape(url)))
     end
 
     private
