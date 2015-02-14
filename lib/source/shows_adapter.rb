@@ -4,7 +4,10 @@ module Source
   class ShowsAdapter < AdapterBase
 
     def shows(source_data)
-      convert source_data['Data']['Series'], show_conversions
+      shows = source_data['Data']['Series']
+      shows = [shows] if shows.is_a?(Hash)
+
+      convert shows, show_conversions
     end
 
     def show_ids_and_time(source_data)
@@ -38,7 +41,7 @@ module Source
         property: :network,
         default:  nil
       }]
-  end
+    end
 
   end
 end
