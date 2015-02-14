@@ -1,12 +1,12 @@
 require 'test_helper'
 require 'source/shows_gateway'
 
-class SourceShowsGatewayTest < ActionDispatch::IntegrationTest
+class SourceShowsSearchGatewayTest < ActionDispatch::IntegrationTest
 
   setup do
-    @gateway = Source::ShowsGateway.new
-    @shows = @gateway.search('the office')
-    @first_show = @shows['Data']['Series'][0]
+    gateway = Source::ShowsGateway.new
+    shows = gateway.search('the office')
+    @first_show = shows['Data']['Series'][0]
   end
 
   test 'has seriesid' do
