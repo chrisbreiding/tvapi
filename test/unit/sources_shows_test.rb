@@ -1,0 +1,51 @@
+require 'test_helper'
+require 'source/shows'
+
+class SourceShowsTest < ActiveSupport::TestCase
+
+  test 'search' do
+    Source::ShowsGateway.any_instance.stubs(:search).returns(gateway_search_result)
+    source_shows = Source::Shows.new
+
+    assert_equal expected_search_result, source_shows.search('chips dub')
+  end
+
+  def expected_search_result
+    [{
+      id: '1234',
+      name: 'Chips Dub',
+      description: 'Chips Dub is about...',
+      first_aired: DateTime.parse('2003-12-02'),
+      network: 'BAR'
+    },{
+      id: '5678',
+      name: 'Chips Dub (UK)',
+      description: 'Veribly, Chips Dub is about...',
+      first_aired: DateTime.parse('2006-02-23'),
+      network: 'QUX'
+    }]
+  end
+
+  def gateway_search_result
+    {
+      'Data' => {
+        'Series' => [
+          {
+            'seriesid' => '1234',
+            'SeriesName' => 'Chips Dub',
+            'Overview' => 'Chips Dub is about...',
+            'FirstAired' => '2003-12-02',
+            'Network' => 'BAR'
+          },{
+            'seriesid' => '5678',
+            'SeriesName' => 'Chips Dub (UK)',
+            'Overview' => 'Veribly, Chips Dub is about...',
+            'FirstAired' => '2006-02-23',
+            'Network' => 'QUX'
+          }
+        ]
+      }
+    }
+  end
+
+end
