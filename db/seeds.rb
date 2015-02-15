@@ -1,15 +1,22 @@
+require 'source/episodes'
+
 Show.destroy_all
 
 Show.create!([{
-  display_name: 'Show 1 Display',
-  search_name: 'Show 1 Search',
-  file_name: 'Show 1 File',
-  source_id: '1'
+  display_name: 'It\s Always Sunny in Philadelphia',
+  search_name: 'Always Sunny in Philadelphia',
+  file_name: 'It\s Always Sunny in Philadelphia',
+  source_id: '75805'
 },{
-  display_name: 'Show 2 Display',
-  search_name: 'Show 2 Search',
-  file_name: 'Show 2 File',
-  source_id: '2'
+  display_name: 'Better Call Saul',
+  search_name: 'Better Call Saul',
+  file_name: 'Better Call Saul',
+  source_id: '273181'
+},{
+  display_name: 'Curb Your Enthusiasm',
+  search_name: 'Curb Your Enthusiasm',
+  file_name: 'Curb Your Enthusiasm',
+  source_id: '76203'
 }])
 
 Setting.destroy_all
@@ -19,34 +26,9 @@ Setting.create!({
   last_updated: 8.hours.ago
 })
 
-Episode.create!([{
-  title: 'Show 1 Ep 1',
-  season: 1,
-  episode_number: 1,
-  airdate: 3.weeks.ago.to_datetime,
-  show_id: Show.first.id
-},{
-  title: 'Show 1 Ep 2',
-  season: 1,
-  episode_number: 2,
-  airdate: 2.weeks.ago.to_datetime,
-  show_id: Show.first.id
-},{
-  title: 'Show 1 Ep 3',
-  season: 1,
-  episode_number: 3,
-  airdate: 1.week.ago.to_datetime,
-  show_id: Show.first.id
-},{
-  title: 'Show 2 Ep 1',
-  season: 3,
-  episode_number: 1,
-  airdate: 8.days.ago.to_datetime,
-  show_id: Show.second.id
-},{
-  title: 'Show 2 Ep 2',
-  season: 3,
-  episode_number: 2,
-  airdate: 1.day.ago.to_datetime,
-  show_id: Show.second.id
-}]);
+
+Show.all.each do |show|
+  episodes = Source::Episodes.new.episodes_for(show.source_id)
+  show.episodes = Episode.create!(episodes)
+  show.save
+end
