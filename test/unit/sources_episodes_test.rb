@@ -8,30 +8,10 @@ class SourceEpisodesTest < ActiveSupport::TestCase
   end
 
   test 'search' do
-    Source::EpisodesGateway.any_instance.stubs(:episodes_for).returns(gateway_result)
+    Source::EpisodesGateway.any_instance.stubs(:episodes_for).returns(gateway_episodes_result)
     episodes = Source::Episodes.new
 
     assert_equal expected_result, episodes.episodes_for('12345')
-  end
-
-  def gateway_result
-    {
-      'Data' => {
-        'Episode' => [
-          {
-            'SeasonNumber' => '1',
-            'EpisodeNumber' => '1',
-            'FirstAired' => '2014-01-01',
-            'EpisodeName' => 'Ep One'
-          },{
-            'SeasonNumber' => '1',
-            'EpisodeNumber' => '2',
-            'FirstAired' => '2014-01-15',
-            'EpisodeName' => 'Ep Two'
-          }
-        ]
-      }
-    }
   end
 
   def expected_result

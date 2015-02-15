@@ -6,6 +6,10 @@ require 'mocha/test_unit'
 
 class ActiveSupport::TestCase
 
+  teardown do
+    Source::EpisodesGateway.any_instance.unstub(:episodes_for)
+  end
+
   def json(body)
     JSON.parse(body, symbolize_names: true)
   end
@@ -26,6 +30,26 @@ class ActiveSupport::TestCase
             'Overview' => 'Veribly, Chips Dub is about...',
             'FirstAired' => '2006-02-23',
             'Network' => 'QUX'
+          }
+        ]
+      }
+    }
+  end
+
+  def gateway_episodes_result
+    {
+      'Data' => {
+        'Episode' => [
+          {
+            'SeasonNumber' => '1',
+            'EpisodeNumber' => '1',
+            'FirstAired' => '2014-01-01',
+            'EpisodeName' => 'Ep One'
+          },{
+            'SeasonNumber' => '1',
+            'EpisodeNumber' => '2',
+            'FirstAired' => '2014-01-15',
+            'EpisodeName' => 'Ep Two'
           }
         ]
       }

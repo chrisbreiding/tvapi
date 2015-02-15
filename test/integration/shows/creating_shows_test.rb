@@ -1,6 +1,15 @@
 require 'test_helper'
+require 'source/episodes_gateway'
 
 class CreatingShowsTest < ActionDispatch::IntegrationTest
+  setup do
+    Source::EpisodesGateway.any_instance.stubs(:episodes_for).returns(gateway_episodes_result)
+  end
+
+  teardown do
+    Source::EpisodesGateway.any_instance.unstub(:episodes_for)
+  end
+
   test 'valid -> status' do
     create_valid_show
     assert_equal 201, response.status
@@ -16,13 +25,21 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal show_url(show_from_response[:id]), response.location
   end
 
-  test 'valid -> content' do
+  test 'valid -> show content' do
     create_valid_show
     show = show_from_response
     assert_equal show_attributes[:display_name], show[:display_name]
     assert_equal show_attributes[:search_name], show[:search_name]
     assert_equal show_attributes[:file_name], show[:file_name]
     assert_equal show_attributes[:source_id], show[:source_id]
+    assert_equal 2, show[:episode_ids].count
+  end
+
+  test 'valid > episodes' do
+    create_valid_show
+    episodes = episodes_from_response
+    assert_equal 'Ep One', episodes[0][:title]
+    assert_equal 'Ep Two', episodes[1][:title]
   end
 
   test 'no display name -> status' do
@@ -67,6 +84,10 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
 
   def show_from_response
     json(response.body)[:show]
+  end
+
+  def episodes_from_response
+    json(response.body)[:episodes]
   end
 
   def show_attributes

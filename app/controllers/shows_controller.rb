@@ -1,3 +1,5 @@
+require 'source/episodes'
+
 class ShowsController < ApplicationController
 
   def index
@@ -6,6 +8,9 @@ class ShowsController < ApplicationController
 
   def create
     show = Show.new(show_params)
+    episodes = Source::Episodes.new.episodes_for(show.source_id)
+    show.episodes = Episode.create!(episodes)
+
     if show.save
       render json: show, status: 201, location: show
     else
