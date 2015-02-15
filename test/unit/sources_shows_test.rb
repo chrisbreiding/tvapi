@@ -3,15 +3,27 @@ require 'source/shows'
 
 class SourceShowsTest < ActiveSupport::TestCase
 
+  setup do
+    @source_shows = Source::Shows.new
+  end
+
   teardown do
     Source::ShowsGateway.any_instance.unstub(:search)
+    Source::ShowsGateway.any_instance.unstub(:updated_since)
   end
 
   test 'search' do
     Source::ShowsGateway.any_instance.stubs(:search).returns(gateway_search_result)
-    source_shows = Source::Shows.new
 
-    assert_equal expected_search_result, source_shows.search('chips dub')
+    assert_equal expected_search_result, @source_shows.search('chips dub')
+  end
+
+  test 'updated since' do
+    Source::ShowsGateway.any_instance.stubs(:updated_since).returns(updated_shows)
+    show_ids, time = @source_shows.updated_since(12.hours.ago.to_datetime)
+
+    assert_equal ['1234', '5678', '9012'], show_ids
+    assert_equal DateTime.strptime('1423868399', '%s'), time
   end
 
   def expected_search_result
@@ -28,6 +40,15 @@ class SourceShowsTest < ActiveSupport::TestCase
       first_aired: DateTime.parse('2006-02-23'),
       network: 'QUX'
     }]
+  end
+
+  def updated_shows
+    {
+      'Items' => {
+        'Time' => '1423868399',
+        'Series' => ['1234', '5678', '9012']
+      }
+    }
   end
 
 end

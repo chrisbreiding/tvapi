@@ -9,5 +9,10 @@ module Source
       ShowsAdapter.new.shows(result)
     end
 
+    def updated_since(datetime)
+      result = ShowsGateway.new.updated_since(datetime)
+      ShowsAdapter.new.show_ids_and_time(result)
+    end
+
   end
 end
