@@ -11,6 +11,6 @@ class Setting < ActiveRecord::Base
   validates_presence_of :view_link
 
   def self.data
-    self.first || self.new
+    self.first || self.new(view_link: 'http://example.com?q=%s')
   end
 end
