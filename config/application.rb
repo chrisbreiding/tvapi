@@ -24,3 +24,8 @@ module Tvapi
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+ActiveModel::Serializer.setup do |config|
+  config.embed = :ids
+  config.embed_in_root = true
+end

@@ -3,6 +3,10 @@ require 'source/shows'
 
 class SourceShowsTest < ActiveSupport::TestCase
 
+  teardown do
+    Source::ShowsGateway.any_instance.unstub(:search)
+  end
+
   test 'search' do
     Source::ShowsGateway.any_instance.stubs(:search).returns(gateway_search_result)
     source_shows = Source::Shows.new

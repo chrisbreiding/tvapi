@@ -3,6 +3,10 @@ require 'source/shows'
 
 class SearchingSourceShowsTest < ActionDispatch::IntegrationTest
 
+  teardown do
+    Source::ShowsGateway.any_instance.unstub(:search)
+  end
+
   test 'status' do
     stub_source_result gateway_search_result
     get '/source_shows', query: 'chips dub'
