@@ -6,10 +6,6 @@ require 'mocha/test_unit'
 
 class ActiveSupport::TestCase
 
-  teardown do
-    Source::EpisodesGateway.any_instance.unstub(:episodes_for)
-  end
-
   def json(body)
     JSON.parse(body, symbolize_names: true)
   end
