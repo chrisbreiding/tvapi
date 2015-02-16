@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RequestingSettingsTest < ActionDispatch::IntegrationTest
   setup do
-    @date = DateTime.now
+    @date = Time.zone.now
     Setting.create!(view_link: 'Anything', last_updated: @date)
   end
 
