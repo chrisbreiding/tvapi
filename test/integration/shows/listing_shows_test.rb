@@ -11,10 +11,11 @@ class ListingShowsTest < ActionDispatch::IntegrationTest
                          file_name: 'Show 2 File',
                          source_id: '2')
 
+    @three_weeks_ago =3.weeks.ago
     @ep1 = Episode.create!(title: 'Show 1 Ep 1',
                            season: 1,
                            episode_number: 1,
-                           airdate: 3.weeks.ago.to_datetime,
+                           airdate: @three_weeks_ago.to_datetime,
                            show_id: show1.id)
     @ep2 = Episode.create!(title: 'Show 1 Ep 2',
                            season: 1,
@@ -61,5 +62,6 @@ class ListingShowsTest < ActionDispatch::IntegrationTest
     episodes = json(response.body)[:episodes]
     assert_equal Episode.count, episodes.size
     assert_equal 'Show 1 Ep 1', episodes.first[:title]
+    assert_equal @three_weeks_ago.iso8601, episodes.first[:airdate]
   end
 end

@@ -27,6 +27,7 @@ class SearchingSourceShowsTest < ActionDispatch::IntegrationTest
     assert_equal 2, shows.count
     assert_equal 'Chips Dub', shows.first[:name]
     assert_equal 'Chips Dub (UK)', shows.second[:name]
+    assert_equal DateTime.parse('2003-12-02').iso8601, shows.first[:first_aired]
   end
 
   test 'query with no results -> content' do
