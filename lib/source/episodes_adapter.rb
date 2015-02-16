@@ -4,8 +4,8 @@ module Source
   class EpisodesAdapter < AdapterBase
 
     def episodes(source_data)
-      episodes = source_data['Data']['Episode']
-      episodes = [episodes] if episodes.is_a?(Hash)
+      episodes = source_data['Data']['Episode'] || []
+      episodes = [episodes] unless episodes.is_a?(Array)
       convert episodes, episode_conversions
     end
 
