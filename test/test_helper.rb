@@ -7,7 +7,7 @@ require 'mocha/test_unit'
 class ActiveSupport::TestCase
 
   def request_headers
-    { 'api_key' => 'foo' }
+    { 'HTTP_API_KEY' => 'foo' }
   end
 
   def json(body)

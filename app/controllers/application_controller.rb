@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   private
 
   def ensure_authentication
-    unless ENV['client_api_keys'].split('|').include? request.headers['api_key']
+    unless ENV['client_api_keys'].split('|').include? request.headers['HTTP_API_KEY']
       head 401
     end
   end
