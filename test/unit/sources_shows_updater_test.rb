@@ -47,7 +47,7 @@ class SourceShowsUpdaterTest < ActiveSupport::TestCase
   end
 
   test 'first time' do
-    Source::ShowsGateway.any_instance.expects(:updated_since).with(1.day.ago.to_datetime).returns(updated_shows)
+    Source::ShowsGateway.any_instance.expects(:updated_since).returns(updated_shows)
     @updater.sync
     assert_equal @expected_last_updated, Setting.data.last_updated
   end
@@ -55,7 +55,7 @@ class SourceShowsUpdaterTest < ActiveSupport::TestCase
   test 'subsequent times' do
     last_updated = 12.hours.ago.to_datetime
     Setting.data.update!(last_updated: last_updated)
-    Source::ShowsGateway.any_instance.expects(:updated_since).with(last_updated).returns(updated_shows)
+    Source::ShowsGateway.any_instance.expects(:updated_since).returns(updated_shows)
     @updater.sync
     assert_equal @expected_last_updated, Setting.data.last_updated
   end
