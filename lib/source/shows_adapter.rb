@@ -15,7 +15,7 @@ module Source
       show_ids = [show_ids] unless show_ids.is_a?(Array)
       timestamp = source_data['Items']['Time']
 
-      [show_ids, DateTime.strptime(timestamp, '%s')]
+      [show_ids, Time.strptime(timestamp, '%s')]
     end
 
     private
@@ -37,7 +37,7 @@ module Source
         selector: 'FirstAired',
         property: :first_aired,
         default:  '1970-01-01',
-        transform: ->(date_string) { DateTime.parse(date_string) }
+        transform: ->(date_string) { Time.parse(date_string) }
       }, {
         selector: 'Network',
         property: :network,

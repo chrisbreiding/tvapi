@@ -19,7 +19,7 @@ class SourceShowsAdapterShowIdsAndTimeTest < ActiveSupport::TestCase
 
   test 'time' do
     _, time = @adapter.show_ids_and_time(source_data_multiple)
-    assert_equal DateTime.strptime('1423868399', '%s'), time
+    assert_equal Time.strptime('1423868399', '%s'), time
   end
 
   def source_data_multiple

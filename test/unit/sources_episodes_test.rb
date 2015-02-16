@@ -18,12 +18,12 @@ class SourceEpisodesTest < ActiveSupport::TestCase
     [{
       season: 1,
       episode_number: 1,
-      airdate: DateTime.parse('2014-01-01'),
+      airdate: Time.parse('2014-01-01'),
       title: 'Ep One'
     },{
       season: 1,
       episode_number: 2,
-      airdate: DateTime.parse('2014-01-15'),
+      airdate: Time.parse('2014-01-15'),
       title: 'Ep Two'
     }]
   end

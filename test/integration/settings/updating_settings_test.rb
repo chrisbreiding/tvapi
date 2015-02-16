@@ -59,7 +59,7 @@ class UpdatingSettingsTest < ActionDispatch::IntegrationTest
   def setting_attributes
     {
       view_link: 'the view link',
-      last_updated: DateTime.new
+      last_updated: Time.new
     }
   end
 end

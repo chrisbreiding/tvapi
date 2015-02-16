@@ -20,7 +20,7 @@ class SourceShowsUpdaterTest < ActiveSupport::TestCase
     Source::ShowsGateway.any_instance.stubs(:updated_since).returns(updated_shows)
     Source::EpisodesGateway.any_instance.stubs(:episodes_for).returns(gateway_episodes_result)
 
-    @expected_last_updated = DateTime.strptime('1423868399', '%s')
+    @expected_last_updated = Time.strptime('1423868399', '%s')
     @updater = Source::ShowsUpdater.new
   end
 

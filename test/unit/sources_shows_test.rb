@@ -23,7 +23,7 @@ class SourceShowsTest < ActiveSupport::TestCase
     show_ids, time = @source_shows.updated_since(12.hours.ago.to_datetime)
 
     assert_equal ['1234', '5678', '9012'], show_ids
-    assert_equal DateTime.strptime('1423868399', '%s'), time
+    assert_equal Time.strptime('1423868399', '%s'), time
   end
 
   def expected_search_result
@@ -31,13 +31,13 @@ class SourceShowsTest < ActiveSupport::TestCase
       id: '1234',
       name: 'Chips Dub',
       description: 'Chips Dub is about...',
-      first_aired: DateTime.parse('2003-12-02'),
+      first_aired: Time.parse('2003-12-02'),
       network: 'BAR'
     },{
       id: '5678',
       name: 'Chips Dub (UK)',
       description: 'Veribly, Chips Dub is about...',
-      first_aired: DateTime.parse('2006-02-23'),
+      first_aired: Time.parse('2006-02-23'),
       network: 'QUX'
     }]
   end

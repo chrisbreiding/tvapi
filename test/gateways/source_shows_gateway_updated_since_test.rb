@@ -7,7 +7,7 @@ class SourceShowsGatewayUpdatedSinceTest < ActionDispatch::IntegrationTest
     gateway = Source::ShowsGateway.new
     @two_hours_ago = 2.hours.ago.to_datetime
     data = gateway.updated_since(@two_hours_ago)
-    @time = DateTime.strptime(data['Items']['Time'], '%s')
+    @time = Time.strptime(data['Items']['Time'], '%s')
     @show_ids = data['Items']['Series']
   end
 

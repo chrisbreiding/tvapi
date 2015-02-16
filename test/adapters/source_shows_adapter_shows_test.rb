@@ -29,7 +29,7 @@ class SourceShowsAdapterShowsTest < ActiveSupport::TestCase
 
   test 'multiple -> first_aired' do
     first_show = @adapter.shows(source_data_multiple)[0]
-    assert_equal DateTime.parse('2015-02-13'), first_show[:first_aired]
+    assert_equal Time.parse('2015-02-13'), first_show[:first_aired]
   end
 
   test 'multiple -> network' do
@@ -54,7 +54,7 @@ class SourceShowsAdapterShowsTest < ActiveSupport::TestCase
 
   test 'default first_aired' do
     second_show = @adapter.shows(source_data_multiple)[1]
-    assert_equal DateTime.parse('1970-01-01'), second_show[:first_aired]
+    assert_equal Time.parse('1970-01-01'), second_show[:first_aired]
   end
 
   test 'default network' do
@@ -79,7 +79,7 @@ class SourceShowsAdapterShowsTest < ActiveSupport::TestCase
 
   test 'single -> first_aired' do
     first_show = @adapter.shows(source_data_single)[0]
-    assert_equal DateTime.parse('2015-02-13'), first_show[:first_aired]
+    assert_equal Time.parse('2015-02-13'), first_show[:first_aired]
   end
 
   test 'single -> network' do

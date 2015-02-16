@@ -30,7 +30,7 @@ module Source
         selector: 'FirstAired',
         property: :airdate,
         default: '1970-01-01',
-        transform: ->(date_string) { DateTime.parse(date_string) }
+        transform: ->(date_string) { Time.parse(date_string) }
       }]
     end
 

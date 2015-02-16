@@ -29,7 +29,7 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
 
   test 'multiple -> airdate' do
     first_episode = @adapter.episodes(source_data_multiple)[0]
-    assert_equal DateTime.parse('2014-01-01'), first_episode[:airdate]
+    assert_equal Time.parse('2014-01-01'), first_episode[:airdate]
   end
 
   test 'default season' do
@@ -49,7 +49,7 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
 
   test 'default airdate' do
     second_episode = @adapter.episodes(source_data_multiple)[1]
-    assert_equal DateTime.parse('1970-01-01'), second_episode[:airdate]
+    assert_equal Time.parse('1970-01-01'), second_episode[:airdate]
   end
 
   test 'single -> count' do
@@ -74,7 +74,7 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
 
   test 'single -> airdate' do
     first_episode = @adapter.episodes(source_data_single)[0]
-    assert_equal DateTime.parse('2014-01-01'), first_episode[:airdate]
+    assert_equal Time.parse('2014-01-01'), first_episode[:airdate]
   end
 
   def source_data_multiple
