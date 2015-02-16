@@ -9,19 +9,19 @@ class SearchingSourceShowsTest < ActionDispatch::IntegrationTest
 
   test 'status' do
     stub_source_result gateway_search_result
-    get '/source_shows', query: 'chips dub'
+    get '/source_shows', { query: 'chips dub' }, request_headers
     assert_equal 200, response.status
   end
 
   test 'type' do
     stub_source_result gateway_search_result
-    get '/source_shows', query: 'chips dub'
+    get '/source_shows', { query: 'chips dub' }, request_headers
     assert_equal Mime::JSON, response.content_type
   end
 
   test 'query with results -> content' do
     stub_source_result gateway_search_result
-    get '/source_shows', query: 'chips dub'
+    get '/source_shows', { query: 'chips dub' }, request_headers
 
     shows = response_shows
     assert_equal 2, shows.count
@@ -31,14 +31,14 @@ class SearchingSourceShowsTest < ActionDispatch::IntegrationTest
 
   test 'query with no results -> content' do
     stub_source_empty_result
-    get '/source_shows', query: 'nope'
+    get '/source_shows', { query: 'nope' }, request_headers
 
     assert_equal 0, response_shows.count
   end
 
   test 'lacking query -> content' do
     stub_source_empty_result
-    get '/source_shows'
+    get '/source_shows', {}, request_headers
 
     assert_equal 0, response_shows.count
   end

@@ -36,7 +36,7 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
     attributes[:display_name] = @updated_name
     put "/shows/#{@show.id}",
       { show: attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def update_invalid
@@ -44,7 +44,7 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
     attributes[:display_name] = nil
     put "/shows/#{@show.id}",
       { show: attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def show_from_response

@@ -11,7 +11,7 @@ class DeletingShowsTest < ActionDispatch::IntegrationTest
                  file_name: 'Show 2 File',
                  source_id: '2')
 
-    delete "/shows/#{@show1.id}"
+    delete "/shows/#{@show1.id}", {}, request_headers
   end
 
   test 'status' do

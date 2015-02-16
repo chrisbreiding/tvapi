@@ -37,7 +37,7 @@ class ListingShowsTest < ActionDispatch::IntegrationTest
                            airdate: 1.day.ago.to_datetime,
                            show_id: show2.id)
 
-    get '/shows'
+    get '/shows', {}, request_headers
   end
 
   test 'status' do

@@ -6,6 +6,10 @@ require 'mocha/test_unit'
 
 class ActiveSupport::TestCase
 
+  def request_headers
+    { 'api_key' => 'foo' }
+  end
+
   def json(body)
     JSON.parse(body, symbolize_names: true)
   end

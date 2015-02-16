@@ -31,6 +31,6 @@ class RequestingSettingsTest < ActionDispatch::IntegrationTest
   end
 
   def request(id)
-    get "/settings/#{id}"
+    get "/settings/#{id}", {}, request_headers
   end
 end

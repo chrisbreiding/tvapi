@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UpdatingSettingsTestTest < ActionDispatch::IntegrationTest
+class UpdatingSettingsTest < ActionDispatch::IntegrationTest
   setup do
     @setting = Setting.create!(setting_attributes)
     @updated_view_link = 'updated view link'
@@ -41,7 +41,7 @@ class UpdatingSettingsTestTest < ActionDispatch::IntegrationTest
     attributes[:view_link] = @updated_view_link
     put "/settings/#{id}",
       { setting: attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def update_invalid
@@ -49,7 +49,7 @@ class UpdatingSettingsTestTest < ActionDispatch::IntegrationTest
     attributes[:view_link] = nil
     put "/settings/1",
       { setting: attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def setting_from_response

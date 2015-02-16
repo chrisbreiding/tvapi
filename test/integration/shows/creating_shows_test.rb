@@ -71,7 +71,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
   def create_valid_show
     post '/shows',
       { show: show_attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def create_invalid_show(invalid_attribute, value = nil)
@@ -79,7 +79,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     attributes[invalid_attribute] = value
     post '/shows',
       { show: attributes }.to_json,
-      { 'Content-Type' => 'application/json' }
+      request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
   def show_from_response
