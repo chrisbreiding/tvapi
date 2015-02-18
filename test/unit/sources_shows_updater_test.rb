@@ -1,6 +1,5 @@
 require 'test_helper'
 require 'source/shows_updater'
-require 'pry'
 
 class SourceShowsUpdaterTest < ActiveSupport::TestCase
 

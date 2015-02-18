@@ -1,6 +1,5 @@
 require 'source/shows'
 require 'source/episodes'
-require 'pry'
 
 module Source
   class ShowsUpdater < AdapterBase
