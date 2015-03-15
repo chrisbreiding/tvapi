@@ -11,8 +11,3 @@ task :sync => :environment do
   require 'source/shows_updater'
   Source::ShowsUpdater.new.sync
 end
-
-task :migrate_content_to_user => :environment do
-  user = User.first
-  user.shows = Show.all.to_ary
-end

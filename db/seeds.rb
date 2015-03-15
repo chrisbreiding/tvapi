@@ -5,6 +5,17 @@ Setting.create!({
   last_updated: 8.hours.ago
 })
 
+User.destroy_all
+User.create!([{
+  username: 'john',
+  api_key: 'john_api_key',
+  view_link: 'http://example.com/john?q=%s'
+},{
+  username: 'jane',
+  api_key: 'jane_api_key',
+  view_link: 'http://example.com/jane?q=%s'
+}])
+
 Show.destroy_all
 Show.create!([{
   display_name: 'Portlandia',
@@ -21,6 +32,21 @@ Show.create!([{
   search_name: 'Curb Your Enthusiasm',
   file_name: 'Curb Your Enthusiasm',
   source_id: '76203'
+}])
+
+Viewership.destroy_all
+Viewership.create!([{
+  user_id: User.first.id,
+  show_id: Show.first.id
+},{
+  user_id: User.first.id,
+  show_id: Show.second.id
+},{
+  user_id: User.first.id,
+  show_id: Show.third.id
+},{
+  user_id: User.second.id,
+  show_id: Show.second.id
 }])
 
 Show.all.each do |show|
