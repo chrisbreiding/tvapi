@@ -16,4 +16,8 @@ class Show < ActiveRecord::Base
   has_many :episodes, dependent: :destroy
   has_many :viewerships, dependent: :destroy
   has_many :users, through: :viewerships
+
+  def self.existing(source_id)
+    self.where(source_id: source_id).first
+  end
 end

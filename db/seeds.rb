@@ -18,9 +18,9 @@ User.create!([{
 
 Show.destroy_all
 Show.create!([{
-  display_name: 'It\s Always Sunny in Philadelphia',
+  display_name: 'It\'s Always Sunny in Philadelphia',
   search_name: 'Always Sunny in Philadelphia',
-  file_name: 'It\s Always Sunny in Philadelphia',
+  file_name: 'It\'s Always Sunny in Philadelphia',
   source_id: '75805'
 },{
   display_name: 'Better Call Saul',
