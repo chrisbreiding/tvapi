@@ -1,7 +1,22 @@
 require 'source/episodes'
 
-Show.destroy_all
+Setting.destroy_all
+Setting.create!({
+  last_updated: 8.hours.ago
+})
 
+User.destroy_all
+User.create!([{
+  username: 'john',
+  api_key: '1234',
+  view_link: 'http://example.com/john?q=%s'
+},{
+  username: 'jane',
+  api_key: '5678',
+  view_link: 'http://example.com/jane?q=%s'
+}])
+
+Show.destroy_all
 Show.create!([{
   display_name: 'It\s Always Sunny in Philadelphia',
   search_name: 'Always Sunny in Philadelphia',
@@ -19,13 +34,20 @@ Show.create!([{
   source_id: '76203'
 }])
 
-Setting.destroy_all
-
-Setting.create!({
-  view_link: 'http://example.com?q=%s',
-  last_updated: 8.hours.ago
-})
-
+Viewership.destroy_all
+Viewership.create!([{
+  user_id: User.first.id,
+  show_id: Show.first.id
+},{
+  user_id: User.first.id,
+  show_id: Show.second.id
+},{
+  user_id: User.first.id,
+  show_id: Show.third.id
+},{
+  user_id: User.second.id,
+  show_id: Show.second.id
+}])
 
 Show.all.each do |show|
   episodes = Source::Episodes.new.episodes_for(show.source_id)
