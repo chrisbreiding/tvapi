@@ -14,10 +14,12 @@ gem 'retryable'
 gem 'rubyzip'
 gem 'whenever', :require => false
 
-gem 'pry', groups: [:development, :test]
+group :development, :test do
+  gem 'spring'
+  gem 'byebug'
+end
 
 group :development do
-  gem 'spring'
   gem 'annotate'
 end
 
