@@ -5,9 +5,10 @@ require 'minitest/pride'
 require 'mocha/test_unit'
 
 class ActiveSupport::TestCase
+  fixtures :all
 
-  def request_headers
-    { 'HTTP_API_KEY' => 'apikey' }
+  def request_headers(api_key = 'john_api_key')
+    { 'HTTP_API_KEY' => api_key }
   end
 
   def json(body)

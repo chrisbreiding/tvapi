@@ -8,11 +8,11 @@ Setting.create!({
 User.destroy_all
 User.create!([{
   username: 'john',
-  api_key: '1234',
+  api_key: 'john_api_key',
   view_link: 'http://example.com/john?q=%s'
 },{
   username: 'jane',
-  api_key: '5678',
+  api_key: 'jane_api_key',
   view_link: 'http://example.com/jane?q=%s'
 }])
 

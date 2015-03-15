@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UpdatingShowsTest < ActionDispatch::IntegrationTest
   setup do
-    @show = Show.create!(show_attributes)
+    @show = shows(:show1)
     @updated_name = 'Updated Show Display'
   end
 
@@ -32,7 +32,7 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
   end
 
   def update_valid
-    attributes = show_attributes
+    attributes = @show.attributes
     attributes[:display_name] = @updated_name
     put "/shows/#{@show.id}",
       { show: attributes }.to_json,
@@ -40,7 +40,7 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
   end
 
   def update_invalid
-    attributes = show_attributes
+    attributes = @show.attributes
     attributes[:display_name] = nil
     put "/shows/#{@show.id}",
       { show: attributes }.to_json,
@@ -49,14 +49,5 @@ class UpdatingShowsTest < ActionDispatch::IntegrationTest
 
   def show_from_response
     json(response.body)[:show]
-  end
-
-  def show_attributes
-    {
-      display_name: 'New Show Display',
-      search_name: 'New Show Search',
-      file_name: 'New Show File',
-      source_id: '1'
-    }
   end
 end

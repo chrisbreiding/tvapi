@@ -10,5 +10,5 @@
 
 class User < ActiveRecord::Base
   has_many :viewerships, dependent: :destroy
-  has_many :users, through: :viewerships
+  has_many :shows, through: :viewerships
 end

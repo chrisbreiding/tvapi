@@ -2,7 +2,6 @@ require 'test_helper'
 
 class UpdatingSettingsTest < ActionDispatch::IntegrationTest
   setup do
-    @setting = Setting.create!(setting_attributes)
     @updated_view_link = 'updated view link'
   end
 
@@ -21,34 +20,30 @@ class UpdatingSettingsTest < ActionDispatch::IntegrationTest
     assert_equal @updated_view_link, setting_from_response[:view_link]
   end
 
-  test 'valid -> record' do
+  test 'user 1 -> valid -> record' do
     update_valid
-    assert_equal @updated_view_link, @setting.reload.view_link
+    assert_equal @updated_view_link, User.find(users(:user1).id).view_link
   end
 
-  test 'updates same record regardless of id' do
+  test 'user 1 -> updates same record regardless of id' do
     update_valid 2
-    assert_equal @updated_view_link, @setting.reload.view_link
+    assert_equal @updated_view_link, User.find(users(:user1).id).view_link
   end
 
-  test 'invalid -> status' do
-    update_invalid
-    assert_equal 422, response.status
+  test 'user 2 -> valid -> record' do
+    update_valid 1, 'jane_api_key'
+    assert_equal @updated_view_link, User.find(users(:user2).id).view_link
   end
 
-  def update_valid(id = 1)
-    attributes = setting_attributes
-    attributes[:view_link] = @updated_view_link
+  def update_valid(id = 1, api_key = 'john_api_key')
     put "/settings/#{id}",
-      { setting: attributes }.to_json,
-      request_headers.merge({ 'Content-Type' => 'application/json' })
+      { setting: { view_link: @updated_view_link } }.to_json,
+      request_headers(api_key).merge({ 'Content-Type' => 'application/json' })
   end
 
   def update_invalid
-    attributes = setting_attributes
-    attributes[:view_link] = nil
     put "/settings/1",
-      { setting: attributes }.to_json,
+      { setting: { view_link: nil } }.to_json,
       request_headers.merge({ 'Content-Type' => 'application/json' })
   end
 
@@ -57,9 +52,6 @@ class UpdatingSettingsTest < ActionDispatch::IntegrationTest
   end
 
   def setting_attributes
-    {
-      view_link: 'the view link',
-      last_updated: Time.new
-    }
+    { view_link: 'the view link' }
   end
 end

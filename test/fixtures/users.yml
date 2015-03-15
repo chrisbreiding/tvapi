@@ -1,0 +1,9 @@
+user1:
+  username: 'john'
+  api_key: 'john_api_key'
+  view_link: 'john_view_link'
+
+user2:
+  username: 'jane'
+  api_key: 'jane_api_key'
+  view_link: 'jane_view_link'

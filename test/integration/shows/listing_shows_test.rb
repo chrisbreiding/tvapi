@@ -1,67 +1,42 @@
 require 'test_helper'
 
 class ListingShowsTest < ActionDispatch::IntegrationTest
-  setup do
-    show1 = Show.create!(display_name: 'Show 1 Display',
-                         search_name: 'Show 1 Search',
-                         file_name: 'Show 1 File',
-                         source_id: '1')
-    show2 = Show.create!(display_name: 'Show 2 Display',
-                         search_name: 'Show 2 Search',
-                         file_name: 'Show 2 File',
-                         source_id: '2')
-
-    @three_weeks_ago =3.weeks.ago
-    @ep1 = Episode.create!(title: 'Show 1 Ep 1',
-                           season: 1,
-                           episode_number: 1,
-                           airdate: @three_weeks_ago.to_datetime,
-                           show_id: show1.id)
-    @ep2 = Episode.create!(title: 'Show 1 Ep 2',
-                           season: 1,
-                           episode_number: 2,
-                           airdate: 2.weeks.ago.to_datetime,
-                           show_id: show1.id)
-    @ep3 = Episode.create!(title: 'Show 1 Ep 3',
-                           season: 1,
-                           episode_number: 3,
-                           airdate: 1.week.ago.to_datetime,
-                           show_id: show1.id)
-    @ep4 = Episode.create!(title: 'Show 2 Ep 1',
-                           season: 3,
-                           episode_number: 1,
-                           airdate: 8.days.ago.to_datetime,
-                           show_id: show2.id)
-    @ep5 = Episode.create!(title: 'Show 2 Ep 2',
-                           season: 3,
-                           episode_number: 2,
-                           airdate: 1.day.ago.to_datetime,
-                           show_id: show2.id)
-
-    get '/shows', {}, request_headers
-  end
-
   test 'status' do
+    get '/shows', {}, request_headers
     assert_equal 200, response.status
   end
 
   test 'type' do
+    get '/shows', {}, request_headers
     assert_equal Mime::JSON, response.content_type
   end
 
-  test 'shows' do
+  test 'shows for user 1' do
+    get '/shows', {}, request_headers
+
     shows = json(response.body)[:shows]
-    assert_equal Show.count, shows.size
+    assert_equal 2, shows.size
     assert_equal 'Show 1 Display', shows.first[:display_name]
-    assert_equal [@ep1.id, @ep2.id, @ep3.id], shows.first[:episode_ids]
+    assert_equal [episodes(:show1ep1).id, episodes(:show1ep2).id, episodes(:show1ep3).id], shows.first[:episode_ids]
     assert_equal 'Show 2 Display', shows.second[:display_name]
-    assert_equal [@ep4.id, @ep5.id], shows.second[:episode_ids]
+    assert_equal [episodes(:show2ep1).id, episodes(:show2ep2).id], shows.second[:episode_ids]
   end
 
-  test 'episodes' do
+  test 'shows for user 2' do
+    get '/shows', {}, request_headers('jane_api_key')
+
+    shows = json(response.body)[:shows]
+    assert_equal 1, shows.size
+    assert_equal 'Show 2 Display', shows.first[:display_name]
+    assert_equal [episodes(:show2ep1).id, episodes(:show2ep2).id], shows.first[:episode_ids]
+  end
+
+  test 'episodes for user 1' do
+    get '/shows', {}, request_headers
+
     episodes = json(response.body)[:episodes]
     assert_equal Episode.count, episodes.size
     assert_equal 'Show 1 Ep 1', episodes.first[:title]
-    assert_equal @three_weeks_ago.iso8601, episodes.first[:airdate]
+    assert_equal 3.weeks.ago.beginning_of_day.to_datetime.iso8601, episodes.first[:airdate]
   end
 end

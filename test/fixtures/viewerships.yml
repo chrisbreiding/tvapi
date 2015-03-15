@@ -1,0 +1,11 @@
+viewership1:
+  user: user1
+  show: show1
+
+viewership2:
+  user: user1
+  show: show2
+
+viewership3:
+  user: user2
+  show: show2

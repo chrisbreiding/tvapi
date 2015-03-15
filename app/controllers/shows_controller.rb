@@ -3,7 +3,7 @@ require 'source/episodes'
 class ShowsController < ApplicationController
 
   def index
-    render json: Show.all, status: 200
+    render json: @current_user.shows, status: 200
   end
 
   def create
@@ -12,6 +12,7 @@ class ShowsController < ApplicationController
     show.episodes = Episode.create!(episodes)
 
     if show.save
+      @current_user.shows << show
       render json: show, status: 201, location: show
     else
       render json: show.errors, status: 422
@@ -29,7 +30,8 @@ class ShowsController < ApplicationController
 
   def destroy
     show = Show.find(params[:id])
-    show.destroy
+    @current_user.shows.delete show
+    show.destroy if show.users.empty?
     head 204
   end
 

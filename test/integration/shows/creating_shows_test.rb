@@ -35,11 +35,16 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal 2, show[:episode_ids].count
   end
 
-  test 'valid > episodes' do
+  test 'valid -> episodes' do
     create_valid_show
     episodes = episodes_from_response
     assert_equal 'Ep One', episodes[0][:title]
     assert_equal 'Ep Two', episodes[1][:title]
+  end
+
+  test 'valid -> viewership' do
+    create_valid_show
+    assert_includes User.find(users(:user1).id).shows.collect(&:id), show_from_response[:id]
   end
 
   test 'no display name -> status' do
@@ -95,7 +100,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
       display_name: 'New Show Display',
       search_name: 'New Show Search',
       file_name: 'New Show File',
-      source_id: '1'
+      source_id: '3'
     }
   end
 end
