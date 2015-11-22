@@ -6,6 +6,7 @@ module Source
     require 'zip'
 
     def initialize(api_key)
+      throw 'No API Key provided for thetvdb' unless api_key
       @api_key = api_key
     end
 
