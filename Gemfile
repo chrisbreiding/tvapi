@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.1'
 
 gem 'rails', '4.2.0'
 gem 'rails-api'
-gem 'puma'
 gem 'pg'
 gem 'rack-cors', :require => 'rack/cors'
 
@@ -13,6 +12,10 @@ gem 'figaro'
 gem 'retryable'
 gem 'rubyzip'
 gem 'whenever', :require => false
+
+group :production do
+  gem 'puma'
+end
 
 group :development, :test do
   gem 'spring'
