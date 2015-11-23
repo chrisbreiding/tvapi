@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'source/source'
 require 'source/episodes_gateway'
 
 class CreatingShowsTest < ActionDispatch::IntegrationTest
@@ -37,6 +38,7 @@ class CreatingShowsTest < ActionDispatch::IntegrationTest
     assert_equal show_attributes[:search_name], show[:search_name]
     assert_equal show_attributes[:file_name], show[:file_name]
     assert_equal show_attributes[:source_id], show[:source_id]
+    assert_equal "#{Source.base_url}banners/path/to/poster.jpg", show[:poster]
   end
 
   test 'valid -> episodes' do

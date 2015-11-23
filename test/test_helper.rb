@@ -40,6 +40,9 @@ class ActiveSupport::TestCase
   def gateway_episodes_result
     {
       'Data' => {
+        'Series' => {
+          'poster' => 'path/to/poster.jpg'
+        },
         'Episode' => [
           {
             'SeasonNumber' => '1',

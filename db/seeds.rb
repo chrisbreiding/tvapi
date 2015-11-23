@@ -50,7 +50,8 @@ Viewership.create!([{
 }])
 
 Show.all.each do |show|
-  episodes = Source::Episodes.new.episodes_for(show.source_id)
-  show.episodes = Episode.create!(episodes)
+  data = Source::Episodes.new.show_info_and_episodes_for(show.source_id)
+  show.poster = data[:poster]
+  show.episodes = Episode.create!(data[:poster])
   show.save
 end

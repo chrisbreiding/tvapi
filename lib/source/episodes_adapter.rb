@@ -3,6 +3,10 @@ require 'source/adapter_base'
 module Source
   class EpisodesAdapter < AdapterBase
 
+    def show_info(source_data)
+      { poster: source_data['Data']['Series']['poster'] }
+    end
+
     def episodes(source_data)
       episodes = source_data['Data']['Episode'] || []
       episodes = [episodes] unless episodes.is_a?(Array)

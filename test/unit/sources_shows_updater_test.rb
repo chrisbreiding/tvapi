@@ -8,13 +8,15 @@ class SourceShowsUpdaterTest < ActiveSupport::TestCase
       display_name: 'Foo',
       search_name: 'Foo',
       file_name: 'Foo',
-      source_id: '1234'
+      source_id: '1234',
+      poster: 'old.jpg'
     )
     @show2 = Show.create!(
       display_name: 'Bar',
       search_name: 'Bar',
       file_name: 'Bar',
-      source_id: '5678'
+      source_id: '5678',
+      poster: 'old.jpg'
     )
 
     Source::ShowsGateway.any_instance.stubs(:updated_since).returns(updated_shows)
@@ -27,6 +29,12 @@ class SourceShowsUpdaterTest < ActiveSupport::TestCase
   teardown do
     Source::ShowsGateway.any_instance.unstub(:updated_since)
     Source::EpisodesGateway.any_instance.unstub(:episodes_for)
+  end
+
+  test 'poster' do
+    @updater.sync
+    @show1.reload
+    assert_equal 'path/to/poster.jpg', @show1.poster
   end
 
   test 'episodes count' do

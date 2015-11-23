@@ -25,7 +25,7 @@ class SourceShowsGatewaySearchTest < ActionDispatch::IntegrationTest
     assert_equal '2001-07-01', @first_show['FirstAired']
   end
 
-  test 'Network' do
+  test 'has Network' do
     assert_equal 'BBC Two', @first_show['Network']
   end
 

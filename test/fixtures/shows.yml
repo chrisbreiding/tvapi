@@ -1,11 +1,25 @@
+# == Schema Information
+#
+# Table name: shows
+#
+#  id           :integer          not null, primary key
+#  display_name :string
+#  search_name  :string
+#  file_name    :string
+#  source_id    :string
+#  poster       :string
+#
+
 show1:
   display_name: 'Show 1 Display'
   search_name: 'Show 1 Search'
   file_name: 'Show 1 File'
   source_id: '1'
+  poster: 'posters/show1.jpg'
 
 show2:
   display_name: 'Show 2 Display'
   search_name: 'Show 2 Search'
   file_name: 'Show 2 File'
   source_id: '2'
+  poster: 'posters/show2.jpg'

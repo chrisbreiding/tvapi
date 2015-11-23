@@ -11,3 +11,11 @@ task :sync => :environment do
   require 'source/shows_updater'
   Source::ShowsUpdater.new.sync
 end
+
+task :get_posters => :environment do
+  require 'source/episodes'
+  Show.all.each do |show|
+    data = Source::Episodes.new.show_info_and_episodes_for(show.source_id)
+    show.update!(data[:show_info])
+  end
+end

@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id        :integer          not null, primary key
+#  username  :string
+#  api_key   :string
+#  view_link :string
+#
+
 user1:
   username: 'john'
   api_key: 'john_api_key'

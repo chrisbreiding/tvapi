@@ -1,3 +1,4 @@
+require 'source/source'
 require 'source/gateway_base'
 
 module Source
@@ -21,7 +22,7 @@ module Source
     private
 
     def show_url(show_id)
-      "#{base_url}#{@api_key}/series/#{show_id}/all/en.zip"
+      "#{Source.api_url}#{@api_key}/series/#{show_id}/all/en.zip"
     end
 
     def download_show_zip(show_id)

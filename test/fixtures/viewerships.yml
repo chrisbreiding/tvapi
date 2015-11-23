@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: viewerships
+#
+#  id      :integer          not null, primary key
+#  user_id :integer
+#  show_id :integer
+#
+
 viewership1:
   user: user1
   show: show1

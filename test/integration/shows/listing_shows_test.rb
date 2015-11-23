@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'source/source'
 
 class ListingShowsTest < ActionDispatch::IntegrationTest
   test 'status' do
@@ -17,6 +18,7 @@ class ListingShowsTest < ActionDispatch::IntegrationTest
     shows = json(response.body)[:shows]
     assert_equal 2, shows.size
     assert_equal 'Show 1 Display', shows.first[:display_name]
+    assert_equal "#{Source.base_url}banners/posters/show1.jpg", shows.first[:poster]
     assert_equal [episodes(:show1ep1).id, episodes(:show1ep2).id, episodes(:show1ep3).id], shows.first[:episode_ids]
     assert_equal 'Show 2 Display', shows.second[:display_name]
     assert_equal [episodes(:show2ep1).id, episodes(:show2ep2).id], shows.second[:episode_ids]

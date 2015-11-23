@@ -12,17 +12,18 @@ module Source
       settings_data.update!(last_updated: time)
       Show.all.each do |show|
         if show_ids.include?(show.source_id)
-          update_episodes_for_show(show)
+          update_show(show)
         end
       end
     end
 
     private
 
-    def update_episodes_for_show(show)
+    def update_show(show)
       show.episodes.delete_all
-      episodes = Source::Episodes.new.episodes_for(show.source_id)
-      show.episodes = Episode.create!(episodes)
+      data = Source::Episodes.new.show_info_and_episodes_for(show.source_id)
+      show.update!(data[:show_info])
+      show.episodes = Episode.create!(data[:episodes])
     end
 
   end

@@ -8,20 +8,23 @@ class ShowsController < ApplicationController
 
   def create
     source_id = params[:show][:source_id]
-    show = Show.existing(source_id) || Show.new(show_params)
+    show = Show.existing(source_id)
 
     if @current_user.has_show(source_id)
       head 204
-    elsif show.save
-      if show.episodes.empty?
-        episodes = Source::Episodes.new.episodes_for(show.source_id)
-        show.episodes = Episode.create!(episodes)
-      end
-
+    elsif show
       @current_user.shows << show
       render json: show, status: 201, location: show
     else
-      render json: show.errors, status: 422
+      source_data = Source::Episodes.new.show_info_and_episodes_for(source_id)
+      show = Show.new(show_params.merge(source_data[:show_info]))
+      if show.save
+        show.episodes = Episode.create!(source_data[:episodes])
+        @current_user.shows << show
+        render json: show, status: 201, location: show
+      else
+        render json: show.errors, status: 422
+      end
     end
   end
 

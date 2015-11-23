@@ -7,6 +7,10 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
     @adapter = Source::EpisodesAdapter.new
   end
 
+  test 'poster' do
+    assert_equal 'poster.jpg', @adapter.show_info(source_data_multiple)[:poster]
+  end
+
   test 'multiple -> count' do
     episodes = @adapter.episodes(source_data_multiple)
     assert_equal 3, episodes.count
@@ -80,6 +84,9 @@ class SourceEpisodesAdapterTest < ActiveSupport::TestCase
   def source_data_multiple
     {
       'Data' => {
+        'Series' => {
+          'poster' => 'poster.jpg'
+        },
         'Episode' => [
           {
             'SeasonNumber' => '1',
