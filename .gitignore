@@ -20,3 +20,4 @@
 /config/application.yml
 
 *.zip
+.DS_Store

@@ -42,6 +42,11 @@ module Source
         selector: 'Network',
         property: :network,
         default:  nil
+      }, {
+        selector: 'banner',
+        property: :banner,
+        default:  nil,
+        transform: ->(banner) { banner && "#{Source.base_url}banners/#{banner}" }
       }]
     end
 
