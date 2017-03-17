@@ -17,7 +17,7 @@ User.create!([{
 }])
 
 Show.destroy_all
-Show.create!([{
+shows = [{
   display_name: 'Portlandia',
   search_name: 'Portlandia',
   file_name: 'Portlandia',
@@ -32,7 +32,14 @@ Show.create!([{
   search_name: 'Curb Your Enthusiasm',
   file_name: 'Curb Your Enthusiasm',
   source_id: '76203'
-}])
+}]
+
+shows.each do |show|
+  data = Source::Episodes.new.show_info_and_episodes_for(show[:source_id])
+  show[:poster] = data[:show_info][:poster]
+  show = Show.create!(show)
+  show.episodes = Episode.create!(data[:episodes])
+end
 
 Viewership.destroy_all
 Viewership.create!([{
@@ -48,10 +55,3 @@ Viewership.create!([{
   user_id: User.second.id,
   show_id: Show.second.id
 }])
-
-Show.all.each do |show|
-  data = Source::Episodes.new.show_info_and_episodes_for(show.source_id)
-  show.poster = data[:poster]
-  show.episodes = Episode.create!(data[:poster])
-  show.save
-end
