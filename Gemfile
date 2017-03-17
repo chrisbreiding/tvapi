@@ -12,6 +12,7 @@ gem 'figaro'
 gem 'retryable'
 gem 'rubyzip'
 gem 'whenever', :require => false
+gem 'mixpanel-ruby'
 
 group :production do
   gem 'puma'
