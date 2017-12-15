@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.1'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.5.2'
 gem 'rails-api'
 gem 'pg'
 gem 'rack-cors', :require => 'rack/cors'
