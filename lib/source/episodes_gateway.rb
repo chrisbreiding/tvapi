@@ -33,8 +33,7 @@ module Source
     end
 
     def xml_from_show_zip
-      Zip::File.open("#{Rails.root}/show.zip").read('en.zip.xml')
+      Zip::File.open("#{Rails.root}/show.zip").read('en.xml')
     end
-
   end
 end
