@@ -21,8 +21,7 @@ module Source
 
     def updated_since_url(datetime)
       timestamp = datetime.strftime('%s')
-      "#{Source.api_url}/Updates.php?type=all&time=#{timestamp}"
+      "#{Source.api_url}Updates.php?type=all&time=#{timestamp}"
     end
-
   end
 end
