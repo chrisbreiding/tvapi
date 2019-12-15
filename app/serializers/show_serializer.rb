@@ -17,6 +17,10 @@ class ShowSerializer < ActiveModel::Serializer
   has_many :episodes
 
   def poster
-    "#{Source.base_url}banners/#{object.poster}"
+    if object.poster
+      "#{Source.base_url}banners/#{object.poster}"
+    else
+      ""
+    end
   end
 end

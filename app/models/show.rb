@@ -11,7 +11,7 @@
 #
 
 class Show < ActiveRecord::Base
-  validates_presence_of :display_name, :search_name, :file_name, :source_id, :poster
+  validates_presence_of :display_name, :search_name, :file_name, :source_id
   validates_uniqueness_of :source_id
 
   has_many :episodes, dependent: :destroy
