@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.6.5'
 
 gem 'rails', '4.2.10'
 gem 'rails-api'
