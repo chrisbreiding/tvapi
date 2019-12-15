@@ -12,6 +12,10 @@ task :sync => :environment do
   Source::ShowsUpdater.new.sync
 end
 
+task :reset_updated => :environment do
+  Setting.data.update!(last_updated: 24.hours.ago.to_datetime)
+end
+
 task :get_posters => :environment do
   require 'source/episodes'
   Show.all.each do |show|
