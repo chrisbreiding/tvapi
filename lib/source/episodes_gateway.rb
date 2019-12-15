@@ -12,7 +12,7 @@ module Source
     end
 
     def episodes_for(show_id)
-      Retryable.retryable(tries: 15, on: [OpenURI::HTTPError, TimeoutError]) do
+      Retryable.retryable(tries: 15, on: [OpenURI::HTTPError, Timeout::Error]) do
         download_show_zip show_id
       end
 
