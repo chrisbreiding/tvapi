@@ -10,7 +10,9 @@ module Source
     end
 
     def updated_since(datetime)
-      hash_from_xml_url(updated_since_url(datetime))
+      url = updated_since_url(datetime)
+      print("get updated since: ", url)
+      hash_from_xml_url(url)
     end
 
     private
