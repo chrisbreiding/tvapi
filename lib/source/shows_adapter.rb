@@ -13,9 +13,8 @@ module Source
     def show_ids_and_time(source_data)
       show_ids = source_data['Items']['Series'] || []
       show_ids = [show_ids] unless show_ids.is_a?(Array)
-      timestamp = source_data['Items']['Time']
 
-      [show_ids, Time.strptime(timestamp, '%s')]
+      show_ids
     end
 
     private

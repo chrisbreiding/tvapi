@@ -8,13 +8,13 @@ module Source
       settings_data = Setting.data
       last_updated = settings_data.last_updated || 24.hours.ago.to_datetime
 
-      show_ids, time = Shows.new.updated_since(last_updated)
-      settings_data.update!(last_updated: time)
+      show_ids = Shows.new.updated_since(last_updated)
       Show.all.each do |show|
         if show_ids.include?(show.source_id)
           update_show(show)
         end
       end
+      settings_data.update!(last_updated: Time.now)
     end
 
     private
