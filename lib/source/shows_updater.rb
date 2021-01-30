@@ -21,7 +21,7 @@ module Source
       Show.all.each do |show|
         update_show(show)
       end
-      settings_data.update!(last_updated: Time.now)
+      Setting.data.update!(last_updated: Time.now)
     end
 
     private
