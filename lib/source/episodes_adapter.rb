@@ -3,12 +3,8 @@ require 'source/adapter_base'
 module Source
   class EpisodesAdapter < AdapterBase
 
-    def show_info(source_data)
-      { poster: source_data['Data']['Series']['poster'] }
-    end
-
     def episodes(source_data)
-      episodes = source_data['Data']['Episode'] || []
+      episodes = source_data['data'] || []
       episodes = [episodes] unless episodes.is_a?(Array)
       convert episodes, episode_conversions
     end
@@ -17,24 +13,30 @@ module Source
 
     def episode_conversions
       [{
-        selector: 'SeasonNumber',
+        selector: 'airedSeason',
         property: :season,
         default: '0',
         transform: ->(str) { str.to_i }
       },{
-        selector: 'EpisodeNumber',
+        selector: 'airedEpisodeNumber',
         property: :episode_number,
         default: '0',
         transform: ->(str) { str.to_i }
       },{
-        selector: 'EpisodeName',
+        selector: 'episodeName',
         property: :title,
         default: nil
       },{
-        selector: 'FirstAired',
+        selector: 'firstAired',
         property: :airdate,
         default: '1970-01-01',
-        transform: ->(date_string) { Time.parse(date_string) }
+        transform: ->(date_string) {
+          begin
+            Time.parse(date_string)
+          rescue
+            Time.parse('1970-01-01')
+          end
+        }
       }]
     end
 

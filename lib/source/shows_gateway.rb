@@ -1,29 +1,35 @@
 require 'source/source'
-require 'source/gateway_base'
 
 module Source
-  class ShowsGateway < GatewayBase
-    require 'open-uri'
+  class ShowsGateway
+
+    def show_info(show_id)
+      Source.request(show_url(show_id))
+    end
 
     def search(show_name)
-      hash_from_xml_url(search_url(show_name))
+      Source.request(search_url(show_name))
     end
 
     def updated_since(datetime)
       url = updated_since_url(datetime)
       print("get updated since: ", url)
-      hash_from_xml_url(url)
+      Source.request(url)
     end
 
     private
 
+    def show_url(show_id)
+      "#{Source.api_url}series/#{show_id}"
+    end
+
     def search_url(show_name)
-      "#{Source.api_url}GetSeries.php?seriesname=#{show_name}"
+      "#{Source.api_url}search/series?name=#{show_name}"
     end
 
     def updated_since_url(datetime)
       timestamp = datetime.strftime('%s')
-      "#{Source.api_url}Updates.php?type=all&time=#{timestamp}"
+      "#{Source.api_url}updated/query?fromTime=#{timestamp}"
     end
   end
 end

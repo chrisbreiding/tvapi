@@ -9,8 +9,6 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'active_model_serializers', '0.9.7'
 gem 'figaro'
-gem 'retryable'
-gem 'rubyzip'
 gem 'whenever', :require => false
 gem 'mixpanel-ruby'
 

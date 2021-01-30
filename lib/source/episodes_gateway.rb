@@ -1,39 +1,22 @@
-require 'source/source'
-require 'source/gateway_base'
+require "source/source"
 
 module Source
-  class EpisodesGateway < GatewayBase
-    require 'open-uri'
-    require 'zip'
+  class EpisodesGateway
+    def episodes_for(show_id, prev_data = [], page = 1)
+      result = Source.request(episodes_url(show_id, page))
+      data = prev_data.concat(result["data"])
 
-    def initialize(api_key)
-      throw 'No API Key provided for thetvdb' unless api_key
-      @api_key = api_key
-    end
-
-    def episodes_for(show_id)
-      Retryable.retryable(tries: 15, on: [OpenURI::HTTPError, Timeout::Error]) do
-        download_show_zip show_id
+      if result["links"]["last"] == page
+        return { "data" => data }
       end
 
-      Hash.from_xml(xml_from_show_zip)
+      episodes_for(show_id, data, page + 1)
     end
 
     private
 
-    def show_url(show_id)
-      "#{Source.api_url}#{@api_key}/series/#{show_id}/all/en.zip"
-    end
-
-    def download_show_zip(show_id)
-      remote_data = open(show_url(show_id)).read
-      local_file = open("#{Rails.root}/show.zip", "wb")
-      local_file.write(remote_data)
-      local_file.close
-    end
-
-    def xml_from_show_zip
-      Zip::File.open("#{Rails.root}/show.zip").read('en.xml')
+    def episodes_url(show_id, page)
+      "#{Source.api_url}series/#{show_id}/episodes?page=#{page}"
     end
   end
 end

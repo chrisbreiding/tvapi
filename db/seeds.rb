@@ -28,10 +28,15 @@ shows = [{
   file_name: 'Better Call Saul',
   source_id: '273181'
 },{
-  display_name: 'Curb Your Enthusiasm',
-  search_name: 'Curb Your Enthusiasm',
-  file_name: 'Curb Your Enthusiasm',
-  source_id: '76203'
+  display_name: 'Mr. Mayor',
+  search_name: 'Mr Mayor',
+  file_name: 'Mr. Mayor',
+  source_id: '382359'
+},{
+  display_name: 'Superstore',
+  search_name: 'Superstore',
+  file_name: 'Superstore',
+  source_id: '295648'
 }]
 
 shows.each do |show|
@@ -52,6 +57,12 @@ Viewership.create!([{
   user_id: User.first.id,
   show_id: Show.third.id
 },{
+  user_id: User.first.id,
+  show_id: Show.fourth.id
+},{
   user_id: User.second.id,
   show_id: Show.second.id
+},{
+  user_id: User.second.id,
+  show_id: Show.fourth.id
 }])
