@@ -12,6 +12,11 @@ task :sync => :environment do
   Source::ShowsUpdater.new.sync
 end
 
+task "sync:all" => :environment do
+  require 'source/shows_updater'
+  Source::ShowsUpdater.new.sync_all
+end
+
 task :reset_updated => :environment do
   Setting.data.update!(last_updated: 24.hours.ago.to_datetime)
 end

@@ -17,6 +17,13 @@ module Source
       settings_data.update!(last_updated: Time.now)
     end
 
+    def sync_all
+      Show.all.each do |show|
+        update_show(show)
+      end
+      settings_data.update!(last_updated: Time.now)
+    end
+
     private
 
     def update_show(show)
