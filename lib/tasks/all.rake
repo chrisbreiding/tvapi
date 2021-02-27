@@ -9,11 +9,6 @@ end
 
 task :sync => :environment do
   require 'source/shows_updater'
-  Source::ShowsUpdater.new.sync
-end
-
-task "sync:all" => :environment do
-  require 'source/shows_updater'
   Source::ShowsUpdater.new.sync_all
 end
 
